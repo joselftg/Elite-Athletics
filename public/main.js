@@ -10,13 +10,13 @@ document.querySelectorAll('.desenvolvimento').forEach(function (element) {
 
 const usuarioNome = localStorage.getItem('usuarioNome');
 
-// if (!usuarioNome) {
-//     // Se não houver, redirecionar para a página de login
-//     window.location.href = '/sign-in';
-// } else {
-//     // Aqui você pode realizar ações adicionais se o usuário estiver autenticado
-//     console.log('Usuário autenticado:', usuarioNome);
-// }
+if (!usuarioNome) {
+    // Se não houver, redirecionar para a página de login
+    window.location.href = '/sign-in';
+} else {
+    // Aqui você pode realizar ações adicionais se o usuário estiver autenticado
+    console.log('Usuário autenticado:', usuarioNome);
+}
 
 const username = document.querySelector(".user-name")
 
