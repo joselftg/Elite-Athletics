@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Elite Athletics - Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='sign.css'>
+    <link rel="icon" href="IMG/EA.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <form class="login-form">
+        <img src="IMG/logo.svg" height="100px">
+        <div class="perguntas">
+            <label>Email: <input type="email" id="email" class="email" required
+                    placeholder="Digite seu email..."></label>
+            <label>Senha: <input type="password" id="senha" class="senha" required
+                    placeholder="Digite sua senha..."></label>
+            <button type="button" class="ver_senha">Ver senha</button>
+            <button class="login">LOGIN</button>
+            <p>Não tem uma conta? <a href="/sign-up">Cadastre-se!</a></p>
+        </div>
+    </form>
+
+    <script>
+        document.querySelector('.login').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let email = document.querySelector('.email').value;
+            let senha = document.querySelector('.senha').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, senha }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        console.log('Login bem-sucedido:', data);
+                        localStorage.setItem('usuarioNome', data.nome);
+                        window.location.href = '/';
+                    } else {
+                        console.log('Falha no login:', data);
+                        window.location.reload
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+
+    </script>
+    <script src='sign.js'></script>
+</body>
+
+</html>

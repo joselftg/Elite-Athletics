@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Elite Athletics</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="IMG/EA.svg">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="IMG/elite athletics.png">
+        </div>
+        <div class="menu_bar">
+            <button class="menu_btt inicio" onclick="redirectTo('/')"
+                style="background: #151f54; color: #fff;">INICIO</button>
+            <button class="menu_btt atletas" onclick="redirectTo('/atletas')">ATLETAS</button>
+            <button class="menu_btt tecnicos" onclick="redirectTo('/tecnicos')">TÉCNICOS</button>
+            <button class="menu_btt esportes" onclick="redirectTo('/esportes')">ESPORTES</button>
+            <button class="menu_btt times" onclick="redirectTo('/times')">TIMES</button>
+            <button class="menu_btt sair" onclick="logout()">SAIR</button>
+        </div>
+    </header>
+    <main>
+        <div class="welcome">
+            <button class="perfil-user">
+                <img src="IMG/perfil.png" class="perfi_user" height="150px">
+            </button>
+
+            <div class="mensagem_bem-vindo">
+                <p class="bem-vindo">SEJA BEM-VINDO</p>
+                <p class="user-name"></p>
+            </div>
+
+            <button class="começar desenvolvimento">VAMOS COMEÇAR</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lógica para obter o nome do usuário logado (substitua por sua lógica real)
+            const nomeUsuarioLogado = localStorage.getItem('usuarioNome');
+
+            // Fazer solicitação AJAX para obter o perfil do usuário
+            fetch(`/api/usuarios/perfil/${nomeUsuarioLogado}`)
+                .then(response => response.json())
+                .then(data => {
+                    const perfilUsuario = data.perfil;
+
+                    // Atualizar a imagem do perfil
+                    const perfilUserImg = document.querySelector('.perfi_user');
+                    perfilUserImg.src = perfilUsuario;
+
+                    // Atualizar o nome do usuário (substitua por sua lógica real)
+                    const userName = document.querySelector('.user-name');
+                    userName.textContent = nomeUsuarioLogado;
+                })
+                .catch(error => console.error('Error fetching perfil do usuário:', error));
+        });
+
+    </script>
+
+    <script src='main.js'></script>
+</body>
+
+</html>

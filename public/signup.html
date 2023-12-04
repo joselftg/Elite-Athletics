@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Elite Athletics</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='sign.css'>
+    <link rel="icon" href="IMG/EA.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <form class="sign-up">
+        <div class="form_header">
+            <img src="IMG/logo.svg" height="100px">
+        </div>
+
+        <div class="form-base">
+            <div class="form-esquerda">
+                <label>Nome: <input type="text" id="nome" class="nome" required
+                        placeholder="Digite seu nome..."></label>
+                <label>Email: <input type="email" id="email" class="email" required
+                        placeholder="Digite seu email..."></label>
+                <label>Senha: <input type="password" class="senha" required placeholder="Digite sua senha..."></label>
+                <label>Confirmar Senha: <input type="password" class="confirma_senha" required
+                        placeholder="Confirme sua senha..."></label>
+                <button type="button" class="ver_senha">Ver senha</button>
+            </div>
+            <div class="form-direita">
+                <label>Você é um: <select class="cargo">
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="comum">Usuário comum</option>
+                        <option value="atleta">Atleta</option>
+                        <option value="tecnico">Técnico</option>
+                    </select></label>
+
+                <label class="descricao_area">Sua descrição:
+                    <textarea class="descricao_text"
+                        placeholder="Escreva uma descrição sua e conte sobre suas habilidades esportivas..."></textarea>
+                </label>
+
+                <label>Sua foto de perfil (url): <input type="text" class="foto_perfil" placeholder="Digite a url da sua foto de perfil..." required></label>
+            </div>
+
+        </div>
+        <div class="form-footer">
+            <button class="cadastro">CADASTRAR</button>
+            <p>Já tem uma conta? <a href="/sign-in">Entrar!</a></p>
+        </div>
+    </form>
+    <script>
+        // Atualize o JavaScript para incluir a captura do valor do campo da foto de perfil
+        document.querySelector('.cadastro').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let nome = document.querySelector('.nome').value;
+            let email = document.querySelector('.email').value;
+            let cargo = document.querySelector('.cargo').value;
+            let senha = document.querySelector('.senha').value;
+            let confirmaSenha = document.querySelector('.confirma_senha').value;
+            let descricao = document.querySelector('.descricao_text').value;
+            let perfil = document.querySelector('.foto_perfil').value; // Nova linha para obter a url da foto de perfil
+
+            if (senha.length < 6) {
+                alert('A senha deve ter pelo menos 6 caracteres.');
+                return;
+            }
+
+            if (/\s/.test(senha)) {
+                alert('A senha não deve conter espaços.');
+                return;
+            }
+
+            if (senha !== confirmaSenha) {
+                alert('A senha e a confirmação de senha devem ser iguais.');
+                return;
+            }
+
+            fetch('/cadastrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nome, email, senha, cargo, descricao, perfil }), // Adicionando a url da foto de perfil ao corpo da requisição
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    window.location.href = '/sign-in';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('[ Error ] - Tente novamente!')
+                    window.location.reload
+                });
+        });
+
+    </script>
+
+    <script src='sign.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,297 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    user-select: none;
+    outline: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+header img {
+    padding: 20px 0;
+}
+
+.menu_bar {
+    width: 50%;
+    display: flex;
+    gap: 20px;
+}
+
+.menu_btt {
+    width: 100%;
+    background: none;
+    color: #151f54;
+    border: none;
+    padding: 15px 0;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+    border-radius: 5px;
+    font-weight: bold;
+    background: transparent;
+}
+
+.menu_btt:hover,
+.menu_btt:focus {
+    background: #151f54;
+    color: #fff;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #151f54, #303f93);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.welcome {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.mensagem_bem-vindo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.bem-vindo {
+    font-size: 50px;
+    color: #151f54;
+}
+
+.user-name {
+    color: #151f54;
+    font-style: italic;
+    font-size: 40px;
+}
+
+.perfil-user {
+    border-radius: 150px;
+    border: none;
+    background: transparent;
+    box-shadow: 0 0 16px 3px #00000061;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-user img{
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    object-fit: cover;
+}
+
+.começar {
+    background: #f8a92a;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.começar:hover,
+.começar:focus {
+    background: #f06c00
+}
+
+.main_user{
+    height: calc(100% - 140px);
+    padding: 30px 0;
+}
+
+.imagens {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: auto;
+    padding: 0 30px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: white transparent;
+}
+
+.imagens::-webkit-scrollbar {
+    width: 12px;
+}
+
+.imagens::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin: 0 30px ;
+}
+
+.imagens::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.imagens::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+}
+
+.imagens::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+.atleta_infos{
+    width: 370px;
+    height: 100%;
+    background: #fff;
+    color: #000000;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.atleta_infos p{
+    height: 209px;
+    font-size: 18px;
+    overflow-y: auto;
+}
+
+.perfil_atleta{
+    background: #151f54;
+    width: 100%;
+    height: 330px;
+    /* min-height: 300px; */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.mensagem{
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    border: none;
+    background: #f8a92a;
+    color: #fff;
+    padding: 15px;
+    transition: color 0.3s, background 0.3s;
+}
+
+.mensagem:hover{
+    background: #f06c00;
+}
+
+.mensagem:focus{
+    background: #151f54;
+}
+
+.lista-esportes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: #000000;
+    overflow: hidden;
+}
+
+.handebol,
+.futvolei {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    font-size: 60px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    /* Adicionei "transform" e "filter" à transição */
+    overflow: hidden;
+    /* Para garantir que a imagem não ultrapasse os limites do contêiner */
+}
+
+.handebol:hover,
+.futvolei:hover {
+    transform: scale(1.05);
+}
+
+.handebol img,
+.futvolei img {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(5px) brightness(0.7);
+    transition: filter 0.3s;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    /* Adicionei "filter" à transição */
+}
+
+.handebol:hover img,
+.futvolei:hover img {
+    filter: blur(0px) brightness(1);
+}
+
+.handebol p,
+.futvolei p {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Adicionei uma transição para o texto */
+    transition: all 0.3s;
+}
+
+.handebol:hover p,
+.futvolei:hover p {
+    transform: translate(-50%, -50%) scale(1.05);
+    text-shadow: 0px 0 20px #ffffffeb;
+    /* Adicionei escala ao texto no hover */
+}

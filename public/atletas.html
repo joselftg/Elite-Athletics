@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Elite Athletics</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="IMG/EA.svg">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="IMG/elite athletics.png">
+        </div>
+        <div class="menu_bar">
+            <button class="menu_btt inicio" onclick="redirectTo('/')">INICIO</button>
+            <button class="menu_btt atletas" onclick="redirectTo('/atletas')"
+                style="background: #151f54; color: #fff;">ATLETAS</button>
+            <button class="menu_btt tecnicos" onclick="redirectTo('/tecnicos')">TÉCNICOS</button>
+            <button class="menu_btt esportes" onclick="redirectTo('/esportes')">ESPORTES</button>
+            <button class="menu_btt times" onclick="redirectTo('/times')">TIMES</button>
+            <button class="menu_btt sair" onclick="logout()">SAIR</button>
+        </div>
+    </header>
+    <main class="main_user">
+        <div class="imagens">
+            <!-- <div class="atleta_infos">
+                <img src="{perfil}" class="perfil_atleta">
+                <h1>{nome}</h1>
+                <p class="descricao_atleta">
+                    {descrição}
+                </p>
+                <button id="id_atleta" class="mensagem">MENSAGEM</button> <-- nesse botão faça ao clicar, direcionar o
+                    cliente para a caixa de correspondencia do email do atleta </div>
+            </div> -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ao carregar a página, fazer uma solicitação AJAX para obter informações dos atletas
+            fetch('/api/atletas')
+                .then(response => response.json())
+                .then(data => {
+                    // Manipular o DOM para adicionar elementos para cada atleta
+                    const imagensDiv = document.querySelector('.imagens');
+
+                    data.forEach(atleta => {
+                        const atletaDiv = document.createElement('div');
+                        atletaDiv.classList.add('atleta_infos');
+
+                        const imgPerfil = document.createElement('img');
+                        imgPerfil.src = atleta.perfil;
+                        imgPerfil.classList.add('perfil_atleta');
+
+                        const h1Nome = document.createElement('h1');
+                        h1Nome.textContent = atleta.nome;
+
+                        const pDescricao = document.createElement('p');
+                        pDescricao.classList.add('descricao_atleta');
+                        pDescricao.textContent = atleta.descricao;
+
+                        const btnMensagem = document.createElement('button');
+                        btnMensagem.classList.add('mensagem');
+                        btnMensagem.textContent = 'MENSAGEM';
+
+                        // Adicionar um evento de clique ao botão de mensagem
+                        btnMensagem.addEventListener('click', function () {
+                            redirectToCorrespondencia(atleta.email);
+                        });
+
+                        // Adicionar elementos à div do atleta
+                        atletaDiv.appendChild(imgPerfil);
+                        atletaDiv.appendChild(h1Nome);
+                        atletaDiv.appendChild(pDescricao);
+                        atletaDiv.appendChild(btnMensagem);
+
+                        // Adicionar a div do atleta à div de imagens
+                        imagensDiv.appendChild(atletaDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching atletas:', error));
+        });
+
+        // Função para redirecionar para a caixa de correspondência do email do atleta
+        function redirectToCorrespondencia(email) {
+            // Construir o link de e-mail
+            const mailtoLink = `mailto:${email}`;
+
+            // Criar um elemento de âncora para redirecionar
+            const anchorElement = document.createElement('a');
+            anchorElement.href = mailtoLink;
+
+            // Simular o clique no elemento de âncora para iniciar o cliente de e-mail padrão
+            anchorElement.click();
+        }
+
+
+    </script>
+
+    <script src='main.js'></script>
+</body>
+
+</html>
